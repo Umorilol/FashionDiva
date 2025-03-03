@@ -3,7 +3,9 @@ from PIL import Image
 from skimage import io
 from pyxelate import Pyx, Pal
 
+# Original input
 input_path = '.venv\images\input.png'
+# Removed background path
 output_path = '.venv\images\output.png'
 
 input = Image.open(input_path)
@@ -25,5 +27,5 @@ pyx.fit(image)
 #3 transform image to pixel art using the learned color palette
 new_image = pyx.transform(image)
 
-# save new image with 'skimage.io.imsave()'
+# save new pixelated image with 'skimage.io.imsave()'
 io.imsave('.venv\images\pixel_sweatshirt.png', new_image)
