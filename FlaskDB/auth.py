@@ -14,6 +14,8 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        confirm = request.form['confirm_password']
+
         db = get_db()
         error = None
         
@@ -21,6 +23,8 @@ def register():
             error = 'Username is required.'
         elif not password: 
             error = 'Password is required.'
+        elif password != confirm:
+            error = 'Passwords do not match'
 
         if error is None:
             try:
@@ -32,11 +36,11 @@ def register():
             except db.IntegrityError:
                 error = f"User {username} is already registered."
             else:
-                return redirect(url_for("auth.login"))
+                return redirect(url_for('auth.login'))
             
         flash(error)
 
-    return render_template('auth/register.html')
+    return render_template('auth/SignIn.html')
 
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
@@ -61,7 +65,7 @@ def login():
         
         flash(error)
 
-    return render_template('auth/login.html')
+    return render_template('auth/SignIn.html')
 
 @bp.before_app_request
 def load_logged_in_user():
