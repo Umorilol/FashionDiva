@@ -14,7 +14,7 @@ def allowed_file(filename):
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @bp.route('/', methods=['GET', 'POST'])
-def uploat_file():
+def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
